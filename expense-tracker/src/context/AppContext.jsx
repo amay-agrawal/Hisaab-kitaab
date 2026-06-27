@@ -156,7 +156,8 @@ export function AppProvider({ children }) {
 
   const updateUser = useCallback((updates) => {
     setUser((prev) => ({ ...prev, ...updates }));
-  }, []);
+    fetchLeaderboard();
+  }, [fetchLeaderboard]);
 
   return (
     <AppContext.Provider
