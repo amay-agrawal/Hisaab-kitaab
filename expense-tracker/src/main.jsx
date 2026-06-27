@@ -17,6 +17,10 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
+// Enable sending cookies cross-origin by default
+axios.defaults.withCredentials = true;
+
+
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
