@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/* ─── Dark mode: class-based (adds "dark" to <html>) ─── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Base layer: lowest priority, Tailwind utilities always win ─── */
+@layer base {
+
+  html {
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+
+  /*
+    Apply theme color transitions ONLY to common layout elements.
+    Using @layer base means all Tailwind utility classes (transition-*,
+    animate-*, etc.) automatically override these — no "revert" needed.
+  */
+  body,
+  div,
+  aside,
+  nav,
+  section,
+  header,
+  main,
+  footer,
+  button,
+  input,
+  select,
+  textarea,
+  a,
+  span,
+  p,
+  h1, h2, h3, h4, h5, h6 {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: 150ms;
+    transition-timing-function: ease;
+  }
+
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+/* ─── Focus rings ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Text selection ────────────────────────────────────── */
+::selection {
+  background-color: #bfdbfe;
+  color: #1d4ed8;
+}
+.dark ::selection {
+  background-color: #1e40af50;
+  color: #93c5fd;
+}
+
+/* ─── Shimmer skeleton ──────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.shimmer-box {
+  background: linear-gradient(
+    90deg,
+    #e2e8f0 25%,
+    #f1f5f9 50%,
+    #e2e8f0 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 0.75rem;
+}
+
+.dark .shimmer-box {
+  background: linear-gradient(
+    90deg,
+    #1e293b 25%,
+    #334155 50%,
+    #1e293b 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
