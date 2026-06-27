@@ -506,7 +506,9 @@ const updateUserAvatar = async (req, res) => {
 
     try {
         const userId = req.user._id;
-        const avatarUrl = `http://localhost:8000/uploads/${req.file.filename}`;
+        const protocol = req.headers["x-forwarded-proto"] || req.protocol;
+        const host = req.get("host");
+        const avatarUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
 
         const user = await User.findByIdAndUpdate(
             userId,
